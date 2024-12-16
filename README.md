@@ -1,6 +1,6 @@
-part0
-part1
-  courseinfo
-  phonebook
-  anecdotes
-part2
+ - Part0
+ - Part1
+	 - anecdotes
+	 - phonebook
+	 - courseinfo
+ - Part2
