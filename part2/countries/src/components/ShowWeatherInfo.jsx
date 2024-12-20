@@ -6,7 +6,7 @@ const ShowWeatherInfo = ({ countrie }) => {
     const [weather, setWeather] = useState([])
     
     useEffect(() => {
-            const api_key = "e84ac9af2f415c6fb8ad4122caf95118"
+            const api_key = "api" //Ur api key
             axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${countrie.capital}&appid=${api_key}`)
                 .then(response => {
                     console.log(response.data)
