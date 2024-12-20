@@ -3,18 +3,17 @@ import { useState,useEffect } from 'react'
 import './App.css'
 import axios from 'axios'
 import ListOfCountrie from './components/ListOfCountrie.jsx'
-import ShowCountrieInfo from './components/ShowCountrieInfo.jsx'
+
 
 
 function App() {
+  
   const [countrie,setCountrie] = useState(null)
   const [listcountrie,setListCountrie] = useState([])
   const [showListCountrie,setShowListCountrie] = useState([])
   const [firstTime,setFirstTime] = useState(true)
-  const [showCountrie,setShowCountrie] = useState(null)
-
   function handleClickShowInfo(countrie) {
-    setShowCountrie(countrie)
+    setShowListCountrie([countrie])
   }
   function getAllFirstTime() {
     if(firstTime){ 
@@ -30,10 +29,8 @@ function App() {
 
 
   useEffect(() => {
-    console.log('listcountrie',listcountrie)
     const filtered = listcountrie.filter(countrieN => countrieN.name.common.toLowerCase().includes(countrie.toLowerCase()))
     setShowListCountrie(filtered)
-    console.log('filtered',filtered)
 
   },[countrie])
 
@@ -52,9 +49,7 @@ function App() {
         <ListOfCountrie listcountrie = {showListCountrie} onHandleClick={handleClickShowInfo}></ListOfCountrie>
 
       </div>
-      <div>
-        <ShowCountrieInfo countrie={showCountrie}> </ShowCountrieInfo>
-      </div>
+
     </>
   )
 }

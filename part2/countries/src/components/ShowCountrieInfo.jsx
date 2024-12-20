@@ -2,7 +2,6 @@
 export const ShowCountrieInfo = ({countrie}) => {
     
     if(countrie === null) return null
-    console.log(Object.keys(countrie.languages))
     return (
         <>
         <div>
@@ -16,7 +15,7 @@ export const ShowCountrieInfo = ({countrie}) => {
                 {Object.keys(countrie.languages).map((language) => <li key={language}>{countrie.languages[language]}</li>)}
             </ul>
                
-            <img src={countrie.flags.png} alt={countrie.flags.alt} width={200} height={200} />
+            <img src={countrie.flags.png} alt={countrie.flags.alt} width={300} height={200} />
         </div>
         </>
     )
