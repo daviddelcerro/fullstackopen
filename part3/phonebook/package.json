@@ -4,6 +4,8 @@
   "description": "Fullstackopen  course",
   "main": "index.js",
   "scripts": {
+    "build-ui": "rm -rf dist && cd ../../part2/phonebook && npm run build && cp -r build ../../part3/phonebook/dist",
+    "deploy:full": "npm run build-ui && git add . && git commit -m 'deploy' && git push heroku main",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
