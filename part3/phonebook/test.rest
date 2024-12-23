@@ -1,7 +1,7 @@
 
 ###
 # GET all persons
-GET http://localhost:3001/api/persons
+GET http://fullstackopen-zpnd.onrender.com/api/persons
 ###
 # GET person by id
 GET http://localhost:3001/api/persons/1
@@ -11,7 +11,7 @@ DELETE http://localhost:3001/api/persons/1
 
 ###
 # POST new person
-POST http://localhost:3001/api/persons
+POST http://fullstackopen-zpnd.onrender.com/api/persons
 Content-Type: application/json
 
 {
