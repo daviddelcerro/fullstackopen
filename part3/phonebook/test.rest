@@ -1,0 +1,21 @@
+
+###
+# GET all persons
+GET http://localhost:3001/api/persons
+###
+# GET person by id
+GET http://localhost:3001/api/persons/1
+###
+# DELETE person by id
+DELETE http://localhost:3001/api/persons/1
+
+###
+# POST new person
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "Arto Hellas 2",
+  "number": "040-123456"
+
+}
