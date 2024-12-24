@@ -73,14 +73,15 @@ app.post('/api/persons', (req, res) => {
     })
   }
 
-  const person = {
+  const person =  new Person({
     name: body.name,
     number: body.number,
-    id: generatedId()
-  }
 
-  persons = persons.concat(person)
-  res.json(person)
+  })
+
+  person.save().then(savedPerson => {
+    res.json(savedPerson)
+  })
 })
 
 app.use(unknownEndpoint)
