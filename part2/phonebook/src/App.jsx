@@ -39,14 +39,26 @@ function App() {
       return
     }else {
       services.create({name : event.target[0].value,number : event.target[1].value})
-      .then(newPerson => setPersons(persons.concat(newPerson)))
+      .then(newPerson => {
+        setPersons(persons.concat(newPerson))
+        setNotificationMessage(`Added ${event.target[0].value}`)
+        setNewName('')
+        setNewPhone('')
+        setTimeout(() => {
+          setNotificationMessage(null)
+        },5000)
+      }
+      )
+      .catch(error => {
+        setNotificationMessage(error.response.data.error)
+        setTimeout(() => {
+          setNotificationMessage(null)
+        },5000)
+        console.log(error.response.data.error)
+      }
+      )
 
-      setNotificationMessage(`Added ${event.target[0].value}`)
-      setNewName('')
-      setNewPhone('')
-      setTimeout(() => {
-        setNotificationMessage(null)
-      },5000)
+
     }
 
     
