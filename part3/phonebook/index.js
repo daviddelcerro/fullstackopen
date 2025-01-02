@@ -65,7 +65,7 @@ app.get('/api/persons/:id', (req, res) => {
   })
 })
 
-app.delete('/api/persons/:id', (req, res) => {
+app.delete('/api/persons/:id', (req, res, next) => {
   Person.findByIdAndDelete(req.params.id).then(result => {
     res.status(204).end()
   })
@@ -78,7 +78,7 @@ const generatedId = () => {
     return id
 }
 
-app.post('/api/persons', (req, res) => {
+app.post('/api/persons', (req, res, next) => {
   const body = req.body
 
   if(!body.name || !body.number) {
@@ -98,7 +98,7 @@ app.post('/api/persons', (req, res) => {
   .catch(error => next(error))
 })
 
-app.put('/api/persons/:id', (req, res) => {
+app.put('/api/persons/:id', (req, res, next) => {
   const {name, number}= req.body
 
 
