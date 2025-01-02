@@ -20,13 +20,11 @@ const unknownEndpoint = (req, res) => {
   res.status(404).send({ error: 'unknown endpoint' })
 }
 
-
 let persons = []
 
 app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
-
 app.get('/api/persons', (req, res) => {
   Person.find({}).then(persons => {
     res.json(persons)
@@ -41,16 +39,17 @@ app.get('/info', (req, res) => {
 
 app.get('/api/persons/:id', (req, res) => {
   const id = Number(req.params.id)
-  const person = persons.find(person => person.id === id)
-  Person.findById(id).then(person => {
+  Person.findById(req.params.id).then(person => {
     res.json(person)
   })
 })
 
 app.delete('/api/persons/:id', (req, res) => {
-  const id = Number(req.params.id)
-  persons = persons.filter(person => person.id !== id)
-  res.status(204).end()
+  Person.findByIdAndRemove(req.params.id).then(result => {
+    res.status(204).end()
+  })
+  .catch(error => next(error))
+
 })
 
 const generatedId = () => {
@@ -67,16 +66,9 @@ app.post('/api/persons', (req, res) => {
     })
   }
 
-  if(persons.some(person => person.name === body.name)) {
-    return res.status(400).json({
-        error: 'name must be unique'
-    })
-  }
-
-  const person =  new Person({
+  const person = new Person({
     name: body.name,
     number: body.number,
-
   })
 
   person.save().then(savedPerson => {
@@ -84,7 +76,22 @@ app.post('/api/persons', (req, res) => {
   })
 })
 
+app.put('/api/persons/:id', (req, res) => {
+  const body = req.body
+
+  const person = {
+    name: body.name,
+    number: body.number,
+  }
+
+  Person.findByIdAndUpdate(req.params.id, person, { new: true })
+    .then(updatedPerson => {
+      res.json(updatedPerson)
+    })
+})
+
 app.use(unknownEndpoint)
+
 
 const PORT = process.env.PORT
 app.listen(PORT)

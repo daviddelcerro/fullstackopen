@@ -15,7 +15,7 @@ POST http://fullstackopen-zpnd.onrender.com/api/persons
 Content-Type: application/json
 
 {
-  "name": "Arto Hellas 2",
+  "name": "Alex Hellas 2",
   "number": "040-123456"
 
 }
