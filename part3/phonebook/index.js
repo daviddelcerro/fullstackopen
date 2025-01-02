@@ -29,7 +29,7 @@ const errorHandler = (error, req, res, next) => {
   }
 
   next(error)
-  }
+}
 
 const cors = require('cors')
 
@@ -59,31 +59,25 @@ app.get('/info', (req, res) => {
 })
 
 app.get('/api/persons/:id', (req, res) => {
-  const id = Number(req.params.id)
   Person.findById(req.params.id).then(person => {
     res.json(person)
   })
 })
 
 app.delete('/api/persons/:id', (req, res, next) => {
-  Person.findByIdAndDelete(req.params.id).then(result => {
+  Person.findByIdAndDelete(req.params.id).then(() => {
     res.status(204).end()
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
 
 })
-
-const generatedId = () => {
-  const id = Math.floor(Math.random() * 100000)
-    return id
-}
 
 app.post('/api/persons', (req, res, next) => {
   const body = req.body
 
   if(!body.name || !body.number) {
     return res.status(400).json({
-        error: 'content missing'
+      error: 'content missing'
     })
   }
 
@@ -95,14 +89,14 @@ app.post('/api/persons', (req, res, next) => {
   person.save().then(savedPerson => {
     res.json(savedPerson)
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (req, res, next) => {
-  const {name, number}= req.body
+  const { name, number }= req.body
 
 
-  Person.findByIdAndUpdate(req.params.id, {name, number}, { new: true, runValidators: true, context: 'query' })
+  Person.findByIdAndUpdate(req.params.id, { name, number }, { new: true, runValidators: true, context: 'query' })
     .then(updatedPerson => {
       res.json(updatedPerson)
     })
