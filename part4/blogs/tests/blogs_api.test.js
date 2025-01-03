@@ -14,6 +14,49 @@ beforeEach(async () => {
     await Blog.insertMany(helper.initialBlogs)
 })
 
+describe('when there is initially one user in db', () => {
+    test('creation succeeds with a fresh username', async () => {
+        const usersAtStart = await helper.usersInDb()
+
+        const newUser = {
+            username: 'root',
+            name: 'Superuser',
+            password: '123456789',
+        }
+
+        await api.post('/api/users')
+            .send(newUser)
+            .expect(201)
+            .expect('Content-Type', /application\/json/)
+
+        const usersAtEnd = await helper.usersInDb()
+
+        assert.strictEqual(usersAtEnd.length, usersAtStart.length + 1)
+
+        const usernames = usersAtEnd.map(u => u.username)
+
+        assert(usernames.includes(newUser.username))
+    })
+    test('creation fails with proper statuscode and message if username already taken', async () => {
+        const usersAtStart = await helper.usersInDb()
+
+        const newUser = {
+            username: 'root',
+            name: 'Superuser',
+            password: '123456789',
+        }
+
+        const result = await api.post('/api/users')
+            .send(newUser)
+            .expect(400)
+            .expect('Content-Type', /application\/json/)
+
+        const usersAtEnd = await helper.usersInDb()
+
+        assert.strictEqual(usersAtEnd.length, usersAtStart.length)
+})
+})
+
 describe('when there are initially some blogs saved', () => {
     test('blogs are returned as json', async () => {
         await api
@@ -40,7 +83,8 @@ describe('adding a new blog', () => {
             title: 'Test 3',
             author: 'Test Author',
             url: 'http://test3.com',
-            likes: 2
+            likes: 2,
+            user: '6778694509e2187096318c8e'
         }
 
         await api.post('/api/blogs')
@@ -61,6 +105,7 @@ describe('adding a new blog', () => {
             title: 'Test 4',
             author: 'Test Author 2',
             url: 'http://test4.com',
+            user: '6778694509e2187096318c8e'
         }
 
         const response = await api.post('/api/blogs')
@@ -112,6 +157,8 @@ describe('updating a blog', () => {
         assert.strictEqual(blogsAtEnd[0].likes, 10)
     })
 })
+
+
 
 after(async () => {
     await mongoose.connection.close()

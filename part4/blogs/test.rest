@@ -1,15 +1,51 @@
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "username": "hellas",
+  "name": "Arto Hellas",
+  "password": "hellas"
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Test",
+  "author": "Arto Hellas",
+  "url": "http://testblog1.com",
+  "likes": 7,
+  "userId": "6778694509e2187096318c8e"
+
+}
+###
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
   "title": "Test 2",
-  "author": "test testez",
-  "url": "http://test.com",
-  "likes": 0
+  "author": "Arto Hellas",
+  "url": "http://testblog2.com",
+  "likes": 5,
+  "userId": "6778694509e2187096318c8e"
 
 }
 ###
-GET http://localhost:3003/api/blogs/6777f42fa02f9ec04b498d6e
+GET http://localhost:3003/api/blogs/6778667fdcbac6602e4bdd0c
 
 ###
 GET http://localhost:3003/api/blogs
+
+###
+GET http://localhost:3003/api/users
+
+###
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "username": "hellas",
+  "name": "Arto Hellas",
+  "password": "test"
+}
