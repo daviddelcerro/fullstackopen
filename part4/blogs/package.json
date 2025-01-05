@@ -1,17 +1,18 @@
 {
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "init": "^0.1.2"
+    "init": "^0.1.2",
+    "jsonwebtoken": "^9.0.2"
   },
   "name": "blogs",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test node --test",
-    "dev": "cross-env NODE_ENV=test nodemon index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
     "start": "cross-env NODE_ENV=production node index.js"
   },
   "author": "",

@@ -11,24 +11,24 @@ Content-Type: application/json
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
+
 {
-  "title": "Test",
-  "author": "Arto Hellas",
-  "url": "http://testblog1.com",
-  "likes": 7,
-  "userId": "6778694509e2187096318c8e"
+  "title": "Test - Blog 2",
+  "author": "David",
+  "url": "http://testblog222.com",
+  "likes": 9
 
 }
 ###
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmlkIiwiaWQiOiI2Nzc5MTJmNzlmNTg5NWIxMjM3ZTY3MzEiLCJpYXQiOjE3MzYwMTgwMDYsImV4cCI6MTczNjAyMTYwNn0.LFiDmbdoMBux5nuvjiQfcsgvKZZMu1vUulGKS6wBThM
 
 {
   "title": "Test 2",
   "author": "Arto Hellas",
   "url": "http://testblog2.com",
-  "likes": 5,
-  "userId": "6778694509e2187096318c8e"
+  "likes": 5
 
 }
 ###
