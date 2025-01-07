@@ -4,26 +4,24 @@ const User = require('../models/user')
 
 const initialUsers = [
     {
-        username: 'Arto',  
-        name: 'Arto Hellas',
-        password: 'hellas',
+        username: 'Test',  
+        name: 'Test User',
+        password: 'test',
     },
 ]
 const initialBlogs = [
     {
         title: 'Test Blog 1',
-        author: 'Arto Hellas',
+        author: 'Test User',
         url: 'https://testblog1.com/',
-        likes: 7,
-        user:'6778694509e2187096318c8e'
+        likes: 7
         
     },
     {
         title: 'Test Blog 2',
-        author: 'Arto Hellas',
+        author: 'Test User',
         url: 'https://testblog2.com/',
-        likes: 5,
-        user:'6778694509e2187096318c8e'
+        likes: 5
     }
 ]
 

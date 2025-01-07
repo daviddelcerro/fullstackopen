@@ -22,15 +22,18 @@ Content-Type: application/json
 ###
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmlkIiwiaWQiOiI2Nzc5MTJmNzlmNTg5NWIxMjM3ZTY3MzEiLCJpYXQiOjE3MzYwMTgwMDYsImV4cCI6MTczNjAyMTYwNn0.LFiDmbdoMBux5nuvjiQfcsgvKZZMu1vUulGKS6wBThM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmlkIiwiaWQiOiI2Nzc5MTJmNzlmNTg5NWIxMjM3ZTY3MzEiLCJpYXQiOjE3MzYyNDUyMjgsImV4cCI6MTczNjI0ODgyOH0._5InBU1RmhZL5qlZXuES9y9zpiwaHo_tFwiOUoy7JQY
 
 {
-  "title": "Test 2",
-  "author": "Arto Hellas",
-  "url": "http://testblog2.com",
+  "title": "Test delete",
+  "author": "David",
+  "url": "http://testblogdelete.com",
   "likes": 5
 
 }
+###
+DELETE http://localhost:3003/api/blogs/677d00371fc3f9ef2f3f81fc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmlkIiwiaWQiOiI2Nzc5MTJmNzlmNTg5NWIxMjM3ZTY3MzEiLCJpYXQiOjE3MzYyNDUyMjgsImV4cCI6MTczNjI0ODgyOH0._5InBU1RmhZL5qlZXuES9y9zpiwaHo_tFwiOUoy7JQY
 ###
 GET http://localhost:3003/api/blogs/6778667fdcbac6602e4bdd0c
 
