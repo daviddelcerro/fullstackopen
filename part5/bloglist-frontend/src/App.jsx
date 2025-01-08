@@ -11,9 +11,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
   const [notification, setNotification] = useState(null)
 
   const Notification = ({ message }) => {
@@ -78,20 +75,12 @@ const App = () => {
     }
   }
 
-  const handleNewBlog = async (event) => {
-    event.preventDefault()
+  const handleNewBlog = async (blog) => {
     try {
-      const blogObject = {
-        title: title,
-        author: author,
-        url: url,
-      }
-      await blogService.create(blogObject)
-      setBlogs(blogs.concat(blogObject))
-      setTitle('')
-      setAuthor('')
-      setUrl('')
-      setNotification(`a new blog ${title} by ${author} added`)
+
+      await blogService.create(blog)
+      setBlogs(blogs.concat(blog))
+      setNotification(`a new blog ${blog.title} by ${blog.author} added`)
       setTimeout(() => {
         setNotification(null)
       },5000)
@@ -106,16 +95,8 @@ const App = () => {
     setUser(null)
   }
 
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value)
-  }
-
-  const handleAuthorChange = (event) => {
-    setAuthor(event.target.value)
-  }
-
-  const handleUrlChange = (event) => {
-    setUrl(event.target.value)
+  const handleLike = async (blog) => {
+    await blogService.update(blog.id, blog)
   }
 
   if (user === null) {
@@ -148,16 +129,12 @@ const App = () => {
         </div>
         <div>
           <Togglable buttonLabel='new blog'>
-            <BlogForm onSubmit={handleNewBlog}
-              handleTitleChange={handleTitleChange}
-              handleUrlChange={handleUrlChange}
-              handleAuthorChange={handleAuthorChange}
-              title={title} author={author} url={url} />
+            <BlogForm onSubmit={handleNewBlog} />
           </Togglable>
         </div>
         <div>
           {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} user={user} handleRemove={handleRemove} />
+            <Blog key={blog.id} blog={blog} user={user} handleRemove={handleRemove} handleLike={handleLike} />
           )}
         </div>
 

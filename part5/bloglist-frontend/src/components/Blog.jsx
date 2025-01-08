@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 
 
-const Blog = ({ blog, user, handleRemove }) => {
+const Blog = ({ blog, user, handleRemove, handleLike }) => {
 
   const [visible, setVisible] = useState(false)
   const [likes, setLikes] = useState(blog.likes)
@@ -16,11 +16,12 @@ const Blog = ({ blog, user, handleRemove }) => {
     marginBottom: 5
   }
 
-  const handleLike = async () => {
+  const handleLikePre = () => {
     let newBlog = { ...blog, likes: likes + 1 }
     setLikes(newBlog.likes)
 
-    await blogService.update(newBlog.id, newBlog)
+    handleLike(newBlog)
+
   }
 
   const handleRemovePre = () => {
@@ -29,7 +30,7 @@ const Blog = ({ blog, user, handleRemove }) => {
 
   if (visible) {
     return (
-      <div style={blogStyle}>
+      <div className="blog" style={blogStyle}>
         <div>
           {blog.title}
           <button onClick={() => setVisible(false)}>hide</button>
@@ -42,7 +43,7 @@ const Blog = ({ blog, user, handleRemove }) => {
         </div>
         <div>
           likes {likes}
-          <button onClick={handleLike}>like</button>
+          <button onClick={handleLikePre}>like</button>
         </div>
         <div>
           {user.name === blog.user.name &&  (
@@ -54,7 +55,7 @@ const Blog = ({ blog, user, handleRemove }) => {
     )
   }else {
     return (
-      <div style={blogStyle}>
+      <div className='blog' style={blogStyle}>
         {blog.title} {blog.author}
         <button onClick={() => setVisible(true)}>view</button>
       </div>

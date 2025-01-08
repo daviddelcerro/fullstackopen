@@ -1,23 +1,55 @@
 import PropTypes from 'prop-types'
-const BlogForm = ({ onSubmit, handleTitleChange, handleUrlChange, handleAuthorChange, title, author, url }) => {
-  return (
+import { useState } from 'react'
+
+
+const BlogForm = ({ onSubmit }) => {
+    const [title, setTitle] = useState('')
+    const [author, setAuthor] = useState('')
+    const [url, setUrl] = useState('')
+
+    const onTitleChange = (event) => {
+        setTitle(event.target.value)
+    }
+
+    const onAuthorChange = (event) => {
+        setAuthor(event.target.value)
+    }
+
+    const onUrlChange = (event) => {
+        setUrl(event.target.value)
+    }
+    
+    const addBlog = async (event) => {
+        event.preventDefault()
+        const blog = {
+            title: title,
+            author: author,
+            url: url
+        }
+        onSubmit(blog)
+        setTitle('')
+        setAuthor('')
+        setUrl('')
+    }
+  
+    return (
     <div>
       <div>
         <h2>create a new blog</h2>
       </div>
       <div>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={addBlog}>
           <div>
                 title:
-            <input name="title" value={title} onChange={handleTitleChange} />
+            <input name="title" placeholder="title" value={title} onChange={onTitleChange} />
           </div>
           <div>
                 author:
-            <input name="author" value={author} onChange={handleAuthorChange} />
+            <input name="author" placeholder='author' value={author} onChange={onAuthorChange} />
           </div>
           <div>
                 url:
-            <input name="url" value={url} onChange={handleUrlChange} />
+            <input name="url" placeholder='url' value={url} onChange={onUrlChange} />
           </div>
           <button type="submit">create</button>
         </form>
@@ -28,12 +60,6 @@ const BlogForm = ({ onSubmit, handleTitleChange, handleUrlChange, handleAuthorCh
 
 BlogForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  handleTitleChange: PropTypes.func.isRequired,
-  handleUrlChange: PropTypes.func.isRequired,
-  handleAuthorChange: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired
 }
 
 export default BlogForm
