@@ -16,7 +16,7 @@ const App = () => {
   const [url, setUrl] = useState('')
   const [notification, setNotification] = useState(null)
 
-  const Notification = ({message}) => {
+  const Notification = ({ message }) => {
     if (message === null) {
       return null
     }
@@ -29,8 +29,8 @@ const App = () => {
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
+      setBlogs( blogs.sort((a, b) => b.likes - a.likes) )
+    )
   }, [])
 
   useEffect(() => {
@@ -66,6 +66,18 @@ const App = () => {
     }
   }
 
+  const handleRemove = async (blog) => {
+    const id = blog.id
+    if (window.confirm(`remove blog ${blog.title} by ${blog.author}`)) {
+      try {
+        await blogService.remove(id)
+        setBlogs(blogs.filter(blog => blog.id !== id))
+      } catch (exception) {
+        console.log('error deleting blog')
+      }
+    }
+  }
+
   const handleNewBlog = async (event) => {
     event.preventDefault()
     try {
@@ -86,7 +98,7 @@ const App = () => {
     } catch (exception) {
       console.log('error creating new blog')
     }
-}
+  }
 
   const handleLogout = () => {
     window.localStorage.removeItem('loggedBlogappUser')
@@ -137,16 +149,16 @@ const App = () => {
         <div>
           <Togglable buttonLabel='new blog'>
             <BlogForm onSubmit={handleNewBlog}
-             handleTitleChange={handleTitleChange}
-             handleUrlChange={handleUrlChange}
-             handleAuthorChange={handleAuthorChange}
-             title={title} author={author} url={url} />
+              handleTitleChange={handleTitleChange}
+              handleUrlChange={handleUrlChange}
+              handleAuthorChange={handleAuthorChange}
+              title={title} author={author} url={url} />
           </Togglable>
         </div>
         <div>
-        {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
-        )}
+          {blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} user={user} handleRemove={handleRemove} />
+          )}
         </div>
 
       </div>

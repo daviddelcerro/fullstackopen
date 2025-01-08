@@ -1,9 +1,10 @@
-import { useState } from "react"
-import blogService from "../services/blogs"
+import { useState } from 'react'
+import blogService from '../services/blogs'
+import PropTypes from 'prop-types'
 
 
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, user, handleRemove }) => {
 
   const [visible, setVisible] = useState(false)
   const [likes, setLikes] = useState(blog.likes)
@@ -17,22 +18,24 @@ const Blog = ({ blog }) => {
 
   const handleLike = async () => {
     let newBlog = { ...blog, likes: likes + 1 }
-    console.log(newBlog)
     setLikes(newBlog.likes)
-  
+
     await blogService.update(newBlog.id, newBlog)
   }
 
+  const handleRemovePre = () => {
+    handleRemove(blog)
+  }
 
   if (visible) {
     return (
       <div style={blogStyle}>
         <div>
-          {blog.title} 
+          {blog.title}
           <button onClick={() => setVisible(false)}>hide</button>
         </div>
         <div>
-           {blog.author}
+          {blog.author}
         </div>
         <div>
           {blog.url}
@@ -41,17 +44,29 @@ const Blog = ({ blog }) => {
           likes {likes}
           <button onClick={handleLike}>like</button>
         </div>
+        <div>
+          {user.name === blog.user.name &&  (
+            <button onClick={handleRemovePre}>remove</button>
+          )}
+
+        </div>
       </div>
     )
   }else {
     return (
       <div style={blogStyle}>
-        {blog.title} {blog.author} 
+        {blog.title} {blog.author}
         <button onClick={() => setVisible(true)}>view</button>
-      </div> 
+      </div>
     )
   }
 
+}
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  handleRemove: PropTypes.func.isRequired
 }
 
 export default Blog
