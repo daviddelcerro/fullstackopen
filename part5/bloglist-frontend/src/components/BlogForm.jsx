@@ -41,17 +41,17 @@ const BlogForm = ({ onSubmit }) => {
         <form onSubmit={addBlog}>
           <div>
                 title:
-            <input name="title" placeholder="title" value={title} onChange={onTitleChange} />
+            <input name="title" data-testid="title-input" placeholder="title" value={title} onChange={onTitleChange} />
           </div>
           <div>
                 author:
-            <input name="author" placeholder='author' value={author} onChange={onAuthorChange} />
+            <input name="author" data-testid="author-input" placeholder='author' value={author} onChange={onAuthorChange} />
           </div>
           <div>
                 url:
-            <input name="url" placeholder='url' value={url} onChange={onUrlChange} />
+            <input name="url" data-testid="url-input" placeholder='url' value={url} onChange={onUrlChange} />
           </div>
-          <button type="submit">create</button>
+          <button type="submit" data-testid="create-blog-button">create</button>
         </form>
       </div>
     </div>

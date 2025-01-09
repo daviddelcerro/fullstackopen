@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import blogService from '../services/blogs'
 import PropTypes from 'prop-types'
 
@@ -8,6 +8,7 @@ const Blog = ({ blog, user, handleRemove, handleLike }) => {
 
   const [visible, setVisible] = useState(false)
   const [likes, setLikes] = useState(blog.likes)
+
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -29,6 +30,8 @@ const Blog = ({ blog, user, handleRemove, handleLike }) => {
   }
 
   if (visible) {
+    console.log(blog)
+    console.log(user)
     return (
       <div className="blog" style={blogStyle}>
         <div>
@@ -41,12 +44,12 @@ const Blog = ({ blog, user, handleRemove, handleLike }) => {
         <div>
           {blog.url}
         </div>
-        <div>
+        <div >
           likes {likes}
-          <button onClick={handleLikePre}>like</button>
+          <button data-testid="like-button" onClick={handleLikePre}>like</button>
         </div>
         <div>
-          {user.name === blog.user.name &&  (
+          {user.id === blog.user &&  (
             <button onClick={handleRemovePre}>remove</button>
           )}
 
@@ -57,7 +60,7 @@ const Blog = ({ blog, user, handleRemove, handleLike }) => {
     return (
       <div className='blog' style={blogStyle}>
         {blog.title} {blog.author}
-        <button onClick={() => setVisible(true)}>view</button>
+        <button data-testid="view-button" onClick={() => setVisible(true)} >view</button>
       </div>
     )
   }

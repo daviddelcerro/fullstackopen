@@ -18,7 +18,7 @@ const App = () => {
       return null
     }
     return (
-      <div className="notification">
+      <div className="notification" data-testid="notification">
         {message}
       </div>
     )
@@ -77,9 +77,10 @@ const App = () => {
 
   const handleNewBlog = async (blog) => {
     try {
-
-      await blogService.create(blog)
-      setBlogs(blogs.concat(blog))
+      
+      const response =await blogService.create(blog)
+      setBlogs(blogs.concat(response))
+      
       setNotification(`a new blog ${blog.title} by ${blog.author} added`)
       setTimeout(() => {
         setNotification(null)
