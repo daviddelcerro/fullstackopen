@@ -126,7 +126,7 @@ const App = () => {
         </div>
         <div>
           {user.name} logged in
-          <button id='logout-button' onClick={handleLogout}>logout</button>
+          <button data-testid='logout-button' onClick={handleLogout}>logout</button>
         </div>
         <div>
           <Togglable buttonLabel='new blog'>
@@ -135,7 +135,7 @@ const App = () => {
         </div>
         <div>
           {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} user={user} handleRemove={handleRemove} handleLike={handleLike} />
+            <Blog data-testid="blog" key={blog.id} blog={blog} user={user} handleRemove={handleRemove} handleLike={handleLike} />
           )}
         </div>
 

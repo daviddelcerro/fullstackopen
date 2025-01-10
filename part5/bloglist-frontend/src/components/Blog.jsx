@@ -33,7 +33,7 @@ const Blog = ({ blog, user, handleRemove, handleLike }) => {
     console.log(blog)
     console.log(user)
     return (
-      <div className="blog" style={blogStyle}>
+      <div  data-testid="blog" className="blog" style={blogStyle}>
         <div>
           {blog.title}
           <button onClick={() => setVisible(false)}>hide</button>
@@ -50,7 +50,7 @@ const Blog = ({ blog, user, handleRemove, handleLike }) => {
         </div>
         <div>
           {user.id === blog.user &&  (
-            <button onClick={handleRemovePre}>remove</button>
+            <button data-testid="remove-button" onClick={handleRemovePre}>remove</button>
           )}
 
         </div>
@@ -58,7 +58,7 @@ const Blog = ({ blog, user, handleRemove, handleLike }) => {
     )
   }else {
     return (
-      <div className='blog' style={blogStyle}>
+      <div data-testid="blog" className='blog' style={blogStyle}>
         {blog.title} {blog.author}
         <button data-testid="view-button" onClick={() => setVisible(true)} >view</button>
       </div>
