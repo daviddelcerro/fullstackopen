@@ -4,3 +4,16 @@
 	 - phonebook
 	 - courseinfo
  - Part2
+ - Part3 phonebook
+ - Part4 blogs
+ - Part5
+   	 - bloglist-frontend
+   	 - e2e playwright
+ - Part6
+   	 - query-anecdotes
+   	 - redux-anecdotes
+   	 - unicafe-redux
+ - Part7
+         - country-hook
+   	 - routed-anecdotes
+   	 - ultimate-hooks
