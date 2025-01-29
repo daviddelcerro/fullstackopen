@@ -1,0 +1,26 @@
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "username": "David",
+  "name": "David del Cerro",
+  "password": "123456"
+}
+###
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+  "username": "David",
+  "password": "123456"
+}
+
+###
+#Invalid login
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+  "username": "David",
+  "password": "123456"
+}
